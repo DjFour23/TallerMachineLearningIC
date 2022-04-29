@@ -6,6 +6,7 @@ from sklearn.svm import SVC
 from warnings import simplefilter
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 simplefilter(action='ignore', category=FutureWarning)
 
@@ -131,3 +132,26 @@ print(f'accuracy de Test de Entrenamiento: {rf.score(x_test, y_test)}')
 # Accuracy de Validación
 print(f'accuracy de Validación: {rf.score(x_test_out, y_test_out)}')
 
+# K-Nearest neighbors
+
+# Seleccionar un modelo
+
+kn = KNeighborsClassifier()
+
+# Entrenar el modelo
+
+kn.fit(x_train, y_train)
+
+# Metricas
+
+print('*'*50)
+print('K-Nearest neighbors')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {kn.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {kn.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {kn.score(x_test_out, y_test_out)}')
