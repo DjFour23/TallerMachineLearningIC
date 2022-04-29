@@ -1,0 +1,36 @@
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LogisticRegression #libreria del modelo
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from warnings import simplefilter
+from sklearn.tree import DecisionTreeClassifier
+
+simplefilter(action='ignore', category=FutureWarning)
+
+url = 'weatherAUS.csv'
+data = pd.read_csv(url)
+
+data.RainToday.replace(['No', 'Yes'], [0, 1], inplace= True)
+data.RainTomorrow.replace(['No', 'Yes'], [0, 1], inplace= True)
+
+data.drop(['WindGustDir', 'WindGustSpeed', 'WindDir9am', 'WindDir3pm', 'Location', 'MinTemp'
+           , 'MaxTemp', 'WindSpeed9am', 'WindSpeed3pm', 'Humidity9am', 'Humidity3pm'
+           , 'Pressure9am', 'Pressure3pm', 'Temp9am', 'Temp3pm', 'Cloud9am', 'Cloud3pm', 'Sunshine','Date', 'Evaporation'], axis=1, inplace=True)
+
+data.dropna(axis=0, how='any', inplace=True)
+
+# Partir la data por la mitad (Media pa training y media pa testing)
+
+data_train = data[:71097]
+data_test = data[71097:]
+
+x = np.array(data_train.drop(['RainTomorrow'], 1))
+y = np.array(data_train.RainTomorrow) # 0 No llueve hoy 1 si llueve hoy
+
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+x_test_out = np.array(data_test.drop(['RainTomorrow'], 1))
+y_test_out = np.array(data_test.RainTomorrow) # 0 No llueve hoy 1 si llueve hoy
+
