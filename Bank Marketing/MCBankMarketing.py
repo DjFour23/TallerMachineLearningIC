@@ -42,4 +42,25 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 x_test_out = np.array(data_train.drop(['y'], 1))
 y_test_out = np.array(data_train.y) # 0 desconocido 1 fallo 2 otro 3 exito
 
+# Regresión Logística
+
+# Seleccionar un modelo
+logreg = LogisticRegression(solver='lbfgs', max_iter = 7600)
+
+# Entreno el modelo
+logreg.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Regresión Logística')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {logreg.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {logreg.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {logreg.score(x_test_out, y_test_out)}')
 
