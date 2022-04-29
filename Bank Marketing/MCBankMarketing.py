@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from warnings import simplefilter
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 simplefilter(action='ignore', category=FutureWarning)
 
@@ -107,4 +108,26 @@ print(f'accuracy de Test de Entrenamiento: {arbol.score(x_test, y_test)}')
 
 # Accuracy de Validación
 print(f'accuracy de Validación: {arbol.score(x_test_out, y_test_out)}')
+
+# RANDOM FOREST
+
+rf = RandomForestClassifier()
+
+# Entrenar el modelo
+rf.fit(x_train, y_train)
+
+# Metricas
+
+print('*'*50)
+print('Random Forest')
+
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {rf.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {rf.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {rf.score(x_test_out, y_test_out)}')
 
